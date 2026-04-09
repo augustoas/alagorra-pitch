@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A La Gorra — Pitch Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dim: #8B6914;
+    --black: #0A0A0A;
+    --black-mid: #111111;
+    --black-card: #161616;
+    --black-border: #222222;
+    --white: #F5F0E8;
+    --white-dim: #9A9080;
+    --accent: #D4AF37;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--black-border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav-logo span { font-size: 1.1rem; }
+
+  .nav-links {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--white-dim);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+    border-radius: 2px;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* SECTIONS */
+  section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* HERO */
+  #hero {
+    align-items: center;
+    text-align: center;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.08) 0%, transparent 70%);
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-title .gold { color: var(--gold); }
+  .hero-title .italic { font-style: italic; font-weight: 400; }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--white-dim);
+    max-width: 600px;
+    line-height: 1.7;
+    margin: 0 auto 3rem;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .badge {
+    border: 1px solid var(--black-border);
+    padding: 0.5rem 1.2rem;
+    border-radius: 2px;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+  }
+
+  .badge.gold {
+    border-color: var(--gold-dim);
+    color: var(--gold);
+    background: rgba(201,168,76,0.06);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--white-dim);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s forwards;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+
+  /* SECTION HEADERS */
+  .section-number {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 3rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  /* PROBLEM */
+  #problema {
+    background: linear-gradient(135deg, var(--black) 60%, rgba(201,168,76,0.03) 100%);
+  }
+
+  .problems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5px;
+    background: var(--black-border);
+    border: 1px solid var(--black-border);
+    margin-bottom: 3rem;
+  }
+
+  .problem-card {
+    background: var(--black-card);
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .problem-card:hover { background: #1a1a1a; }
+
+  .problem-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(201,168,76,0.12);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .problem-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+
+  .problem-card p {
+    font-size: 0.85rem;
+    color: var(--white-dim);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .stat-block {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--black-border);
+    border: 1px solid var(--black-border);
+  }
+
+  .stat {
+    background: var(--black-card);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--white-dim);
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+  }
+
+  .stat-source {
+    font-size: 0.6rem;
+    color: var(--gold-dim);
+    margin-top: 0.4rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* SOLUCION */
+  #solucion {
+    background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(201,168,76,0.06) 0%, transparent 70%);
+  }
+
+  .flow-steps {
+    display: flex;
+    gap: 0;
+    margin-bottom: 3rem;
+    border: 1px solid var(--black-border);
+  }
+
+  .flow-step {
+    flex: 1;
+    padding: 2rem 1.5rem;
+    background: var(--black-card);
+    border-right: 1px solid var(--black-border);
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .flow-step:last-child { border-right: none; }
+  .flow-step:hover { background: #1a1a1a; }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--gold);
+    opacity: 0.4;
+    margin-bottom: 0.75rem;
+  }
+
+  .step-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+
+  .flow-step h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .flow-step p {
+    font-size: 0.78rem;
+    color: var(--white-dim);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .highlight-quote {
+    border-left: 3px solid var(--gold);
+    padding: 1.5rem 2rem;
+    background: rgba(201,168,76,0.04);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.5;
+  }
+
+  /* MERCADO */
+  #mercado { background: var(--black); }
+
+  .market-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--black-border);
+    border: 1px solid var(--black-border);
+    margin-bottom: 2rem;
+  }
+
+  .market-card {
+    background: var(--black-card);
+    padding: 2.5rem 2rem;
+  }
+
+  .market-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .market-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+
+  .market-desc {
+    font-size: 0.82rem;
+    color: var(--white-dim);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .market-source {
+    font-size: 0.65rem;
+    color: var(--gold-dim);
+    margin-top: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* MODELO */
+  #modelo {
+    background: linear-gradient(180deg, var(--black) 0%, #0d0d0d 100%);
+  }
+
+  .revenue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5px;
+    background: var(--black-border);
+    border: 1px solid var(--black-border);
+    margin-bottom: 2rem;
+  }
+
+  .revenue-card {
+    background: var(--black-card);
+    padding: 2rem 1.5rem;
+    transition: background 0.3s;
+  }
+
+  .revenue-card:hover { background: #1c1c1c; }
+  .revenue-card.primary { background: rgba(201,168,76,0.06); }
+
+  .revenue-icon { font-size: 1.6rem; margin-bottom: 1rem; }
+
+  .revenue-card h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+  }
+
+  .revenue-card p {
+    font-size: 0.78rem;
+    color: var(--white-dim);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .revenue-status {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  .status-live { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .status-soon { background: rgba(255,255,255,0.06); color: var(--white-dim); }
+
+  /* EQUIPO */
+  #equipo {
+    background: radial-gradient(ellipse 50% 60% at 20% 50%, rgba(201,168,76,0.05) 0%, transparent 60%);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--black-border);
+    border: 1px solid var(--black-border);
+    margin-bottom: 2rem;
+  }
+
+  .team-card {
+    background: var(--black-card);
+    padding: 3rem 2.5rem;
+  }
+
+  .team-role {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .team-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+  }
+
+  .team-bio {
+    font-size: 0.85rem;
+    color: var(--white-dim);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .team-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--black-border);
+    color: var(--white-dim);
+    border-radius: 2px;
+  }
+
+  /* TRACCION */
+  #traccion { background: var(--black); }
+
+  .traction-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5px;
+    background: var(--black-border);
+    border: 1px solid var(--black-border);
+    margin-bottom: 3rem;
+  }
+
+  .traction-card {
+    background: var(--black-card);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+  }
+
+  .traction-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .traction-label {
+    font-size: 0.72rem;
+    color: var(--white-dim);
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+  }
+
+  /* FONDOS */
+  #fondos {
+    background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, var(--black) 50%);
+  }
+
+  .funds-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .funds-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .funds-subtitle {
+    font-size: 0.9rem;
+    color: var(--white-dim);
+    letter-spacing: 0.05em;
+  }
+
+  .funds-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5px;
+    background: var(--black-border);
+    border: 1px solid var(--black-border);
+  }
+
+  .fund-item {
+    background: var(--black-card);
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+
+  .fund-pct {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 0.25rem;
+  }
+
+  .fund-amount {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .fund-label {
+    font-size: 0.72rem;
+    color: var(--white-dim);
+    line-height: 1.5;
+  }
+
+  /* CIERRE */
+  #cierre {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.1) 0%, transparent 70%);
+    padding: 4rem 3rem;
+  }
+
+  .close-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  .close-title em { font-style: italic; color: var(--gold); }
+
+  .close-sub {
+    font-size: 1.1rem;
+    color: var(--white-dim);
+    max-width: 600px;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 3rem;
+  }
+
+  .close-url {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--gold-dim);
+    padding-bottom: 0.3rem;
+  }
+
+  .close-tagline {
+    margin-top: 4rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+  }
+
+  /* DIVIDERS */
+  .gold-line {
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .two-col-text p {
+    font-size: 0.9rem;
+    color: var(--white-dim);
+    line-height: 1.9;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+
+  .two-col-text p strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 6rem 1.5rem 3rem; }
+    .two-col, .market-grid, .team-grid { grid-template-columns: 1fr; }
+    .traction-grid { grid-template-columns: repeat(2, 1fr); }
+    .funds-grid { grid-template-columns: repeat(2, 1fr); }
+    .flow-steps { flex-direction: column; }
+    .flow-step { border-right: none; border-bottom: 1px solid var(--black-border); }
+    .stat-block { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span>♩</span> A La Gorra</div>
+  <ul class="nav-links">
+    <li><a href="#problema">Problema</a></li>
+    <li><a href="#solucion">Solución</a></li>
+    <li><a href="#mercado">Mercado</a></li>
+    <li><a href="#modelo">Modelo</a></li>
+    <li><a href="#equipo">Equipo</a></li>
+    <li><a href="#fondos">Fondos</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">Startup Chile — Ignite 2026</p>
+  <h1 class="hero-title">
+    La gorra<br>
+    <span class="italic gold">digital.</span>
+  </h1>
+  <p class="hero-sub">
+    La plataforma que conecta músicos en vivo con su audiencia, digitaliza los aportes y reactiva el ecosistema de música en vivo en Chile y Latinoamérica.
+  </p>
+  <div class="hero-badges">
+    <span class="badge gold">En producción</span>
+    <span class="badge">alagorra.cl</span>
+    <span class="badge">MercadoPago + Fintoc</span>
+    <span class="badge">PWA · Sin descarga</span>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section id="problema">
+  <div class="fade-in">
+    <p class="section-number">01 — El Problema</p>
+    <h2 class="section-title">Tres fricciones.<br><em>Un ecosistema roto.</em></h2>
+  </div>
+
+  <div class="problems-grid fade-in">
+    <div class="problem-card">
+      <div class="problem-num">01</div>
+      <h3>El aporte que no ocurre</h3>
+      <p>El público quiere apoyar al músico pero ya no trae efectivo. Los pagos digitales se cuadruplicaron en una década en Chile. El músico pierde ese ingreso — no por falta de intención, sino por falta de herramienta.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">02</div>
+      <h3>El descubrimiento que no existe</h3>
+      <p>No existe un portal donde el público pueda buscar dónde hay música en vivo esta noche, filtrar por estilo, ver un mapa, o conocer a los artistas. Los músicos emergentes son invisibles digitalmente.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">03</div>
+      <h3>El deal que nunca cierra</h3>
+      <p>Los restaurantes pagan ~$60.000 CLP por show — poco para el músico, mucho para el local con presupuesto acotado. Sin herramientas complementarias, el acuerdo no cierra. Todos pierden.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">04</div>
+      <h3>Lo real vale más en la era IA</h3>
+      <p>En un mundo donde la IA genera música, voces e imágenes, un músico tocando en vivo — con sus emociones e imperfecciones — adquiere un valor nuevo. <strong style="color:var(--gold)">La gente busca lo genuino cuando lo artificial se masifica.</strong></p>
+    </div>
+  </div>
+
+  <div class="stat-block fade-in">
+    <div class="stat">
+      <div class="stat-num">4×</div>
+      <div class="stat-label">Crecimiento de pagos digitales en Chile en la última década</div>
+      <div class="stat-source">Banco Central de Chile, ISiP 2023</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">15.500+</div>
+      <div class="stat-label">Restaurantes en Chile, muchos con programación musical</div>
+      <div class="stat-source">Aaron Allen & Associates, 2022</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">10.000+</div>
+      <div class="stat-label">Músicos registrados en la SCD — el universo real es mayor</div>
+      <div class="stat-source">SCD — Sociedad Chilena de Autores e Intérpretes</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUCIÓN -->
+<section id="solucion">
+  <div class="fade-in">
+    <p class="section-number">02 — La Solución</p>
+    <h2 class="section-title">Tu celular es<br><em>el nuevo sombrero.</em></h2>
+  </div>
+
+  <div class="flow-steps fade-in">
+    <div class="flow-step">
+      <div class="step-num">01</div>
+      <div class="step-icon">📱</div>
+      <h4>Escanea el QR</h4>
+      <p>En la mesa o el escenario. Sin descargar nada. Sin crear cuenta.</p>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">02</div>
+      <div class="step-icon">🎸</div>
+      <h4>Ve el show</h4>
+      <p>Fotos, nombres, instrumentos. El perfil del artista en un solo link.</p>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">03</div>
+      <div class="step-icon">💛</div>
+      <h4>Elige tu aporte</h4>
+      <p>$2.000 a $100.000 CLP. O escribe un mensaje para el artista.</p>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">04</div>
+      <div class="step-icon">⚡</div>
+      <h4>Paga en 30 segundos</h4>
+      <p>Tarjeta o transferencia. El dinero llega directo al músico — sin intermediarios.</p>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">05</div>
+      <div class="step-icon">🎵</div>
+      <h4>El músico lo ve en vivo</h4>
+      <p>Feed en tiempo real durante el show. Cada aporte, cada mensaje — instantáneo.</p>
+    </div>
+  </div>
+
+  <div class="highlight-quote fade-in">
+    "La música en vivo no puede ser generada por una IA. Ese momento existe una sola vez. A La Gorra es la plataforma que lo monetiza, lo visibiliza y lo protege."
+  </div>
+</section>
+
+<!-- MERCADO -->
+<section id="mercado">
+  <div class="fade-in">
+    <p class="section-number">03 — Mercado</p>
+    <h2 class="section-title">Un mercado global.<br><em>Una entrada clara.</em></h2>
+  </div>
+
+  <div class="market-grid fade-in">
+    <div class="market-card">
+      <div class="market-label">TAM — Mercado Global de Música en Vivo</div>
+      <div class="market-num">USD 38,6B</div>
+      <div class="market-desc">El mercado global de música en vivo en 2025, con proyección de crecer a USD 62,6 mil millones al 2034 (CAGR 8,78%). América Latina registró un crecimiento del 35% en asistencia en 2023.</div>
+      <div class="market-source">Custom Market Insights, 2026 · ILMC</div>
+    </div>
+    <div class="market-card">
+      <div class="market-label">SAM — Música en Vivo LatAm</div>
+      <div class="market-num">USD 2,4B</div>
+      <div class="market-desc">Mercado de música en LatAm en 2025, creciendo a 9,96% anual hacia USD 5,17 mil millones al 2034. MercadoPago opera en todos los mercados clave: Chile, Argentina, Colombia, México, Brasil.</div>
+      <div class="market-source">Market Data Forecast, 2026</div>
+    </div>
+    <div class="market-card">
+      <div class="market-label">SOM Año 1 — Santiago, Chile</div>
+      <div class="market-num">200 músicos</div>
+      <div class="market-desc">Meta conservadora: 200 músicos activos y 50 restaurantes con QR instalado en la Región Metropolitana. Revenue estimado: ~$7.200.000 CLP/mes solo por comisiones — sin contar booking, merch ni premium.</div>
+      <div class="market-source">Proyección interna · supuestos conservadores</div>
+    </div>
+    <div class="market-card">
+      <div class="market-label">SOM Año 2 — Chile + inicio LatAm</div>
+      <div class="market-num">1.200 músicos</div>
+      <div class="market-desc">1.000 músicos activos en Chile + primeros 200 en Argentina. Revenue estimado: ~$43.200.000 CLP/mes. El modelo es directamente replicable vía MercadoPago sin modificaciones técnicas mayores.</div>
+      <div class="market-source">Proyección interna · supuestos conservadores</div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELO -->
+<section id="modelo">
+  <div class="fade-in">
+    <p class="section-number">04 — Modelo de Negocio</p>
+    <h2 class="section-title">Múltiples fuentes.<br><em>Un activo que escala.</em></h2>
+  </div>
+
+  <div class="revenue-grid fade-in">
+    <div class="revenue-card primary">
+      <div class="revenue-icon">💳</div>
+      <h4>Comisión por aportes</h4>
+      <p>15% sobre cada aporte con tarjeta vía MercadoPago marketplace. Automático, sin intervención del músico.</p>
+      <span class="revenue-status status-live">● Activo hoy</span>
+    </div>
+    <div class="revenue-card">
+      <div class="revenue-icon">🎤</div>
+      <h4>Marketplace de talento</h4>
+      <p>Restaurantes solicitan músicos a través de la plataforma. A La Gorra actúa como manager digital y cobra 10–15% del ticket.</p>
+      <span class="revenue-status status-soon">Próximamente</span>
+    </div>
+    <div class="revenue-card">
+      <div class="revenue-icon">⭐</div>
+      <h4>Planes premium</h4>
+      <p>Freemium tipo Spotify. QRs adicionales, analytics avanzados, fondo personalizado, posición destacada en el directorio.</p>
+      <span class="revenue-status status-soon">Próximamente</span>
+    </div>
+    <div class="revenue-card">
+      <div class="revenue-icon">🧢</div>
+      <h4>Merchandising con QR</h4>
+      <p>Gorras jockey, posa vasos y poleras con QR integrado. El músico lleva su plataforma encima — literalmente.</p>
+      <span class="revenue-status status-soon">Próximamente</span>
+    </div>
+    <div class="revenue-card">
+      <div class="revenue-icon">🎟️</div>
+      <h4>Ticketera integrada</h4>
+      <p>Venta de entradas para shows con aforo. Cierra el ciclo: descubrir → apoyar → comprar entrada.</p>
+      <span class="revenue-status status-soon">Próximamente</span>
+    </div>
+    <div class="revenue-card">
+      <div class="revenue-icon">🎪</div>
+      <h4>Festival A La Gorra</h4>
+      <p>Con data de los mejores artistas de la plataforma, un festival curado por datos — no por relaciones de industria.</p>
+      <span class="revenue-status status-soon">Próximamente</span>
+    </div>
+  </div>
+
+  <div class="highlight-quote fade-in">
+    "El activo real que A La Gorra construye es la red de músicos y sus audiencias — y eso se puede monetizar de muchas formas que hoy ni siquiera existen."
+  </div>
+</section>
+
+<!-- EQUIPO -->
+<section id="equipo">
+  <div class="fade-in">
+    <p class="section-number">05 — Equipo</p>
+    <h2 class="section-title">Construido por alguien<br><em>que vivió el problema.</em></h2>
+  </div>
+
+  <div class="team-grid fade-in">
+    <div class="team-card">
+      <div class="team-role">Team Leader · CEO</div>
+      <div class="team-name">Augusto Álvarez</div>
+      <div class="team-bio">
+        Ingeniero Civil PUC. 6+ años como desarrollador Full Stack en Toteat, ApicBase, Softserve y Tubesoft. Hoy CTO de Neolab. Construyó A La Gorra desde cero, solo, en producción.<br><br>
+        La idea nació en un restaurante en Tongoy: un músico pasó mesa por mesa con su gorra y escuchó lo mismo en todas: <em>"Perdona, no tengo efectivo."</em> Ese momento lo cambió todo.
+      </div>
+      <div class="team-tags">
+        <span class="tag">Full Stack</span>
+        <span class="tag">Product</span>
+        <span class="tag">Flamenco</span>
+        <span class="tag">PUC Chile</span>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-role">Co-Founder · CMO</div>
+      <div class="team-name">José Álvarez Smith</div>
+      <div class="team-bio">
+        Ingeniero Comercial Universidad de Chile. Diplomado en Marketing Estratégico, PUC. Brand Manager en Pernod Ricard liderando Absolut, Beefeater y Buhero Negro en Chile, Uruguay y Paraguay. Casi 4 años en PepsiCo en Trade Marketing.<br><br>
+        Hermano de Augusto, baterista desde chico y fanático de la música en vivo. Aporta lo que la tecnología sola no puede: saber cómo construir marcas que la gente ama.
+      </div>
+      <div class="team-tags">
+        <span class="tag">Brand Marketing</span>
+        <span class="tag">Trade Marketing</span>
+        <span class="tag">Pernod Ricard</span>
+        <span class="tag">U. de Chile</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRACCIÓN -->
+<section id="traccion">
+  <div class="fade-in">
+    <p class="section-number">06 — Tracción</p>
+    <h2 class="section-title">En producción.<br><em>El modelo funciona.</em></h2>
+  </div>
+
+  <div class="traction-grid fade-in">
+    <div class="traction-card">
+      <div class="traction-num">YYY</div>
+      <div class="traction-label">Músicos registrados en la plataforma</div>
+    </div>
+    <div class="traction-card">
+      <div class="traction-num">XXX</div>
+      <div class="traction-label">Shows creados y publicados</div>
+    </div>
+    <div class="traction-card">
+      <div class="traction-num">ZZZ</div>
+      <div class="traction-label">Aportes procesados end-to-end</div>
+    </div>
+    <div class="traction-card">
+      <div class="traction-num">20+</div>
+      <div class="traction-label">Músicos que validaron la idea con interés de adoptarla</div>
+    </div>
+  </div>
+
+  <div class="two-col fade-in">
+    <div class="two-col-text">
+      <p><strong>Primer piloto real</strong> — Show en Viña Santa Catalina (Santiago Urzúa, propietario). 5 músicos en escena. Flujo de pagos funcionando end-to-end. Concepto validado en condiciones reales.</p>
+      <p><strong>Plataforma en producción</strong> — alagorra.cl funcionando con React 18, NestJS, PostgreSQL, MercadoPago marketplace y Fintoc. CI/CD con GitHub Actions. Infraestructura en Google Cloud Run.</p>
+    </div>
+    <div class="two-col-text">
+      <p><strong>Marca en registro</strong> — "A La Gorra" en proceso de inscripción en Inapi vía Idenbiz. Trámite pagado y en curso.</p>
+      <p><strong>Validación artística</strong> — Jazmín Abuauad, profesora de flamenco con 27+ años de trayectoria, primera artista en usar la plataforma y testigo directo del problema.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FONDOS -->
+<section id="fondos">
+  <div class="fade-in">
+    <p class="section-number">07 — Uso de Fondos</p>
+    <h2 class="section-title">$30 millones.<br><em>Equity-free.</em></h2>
+  </div>
+
+  <div class="funds-hero fade-in">
+    <div class="funds-amount">$30.000.000</div>
+    <div class="funds-subtitle">CLP · Startup Chile Ignite · + posibilidad de $20M adicionales</div>
+  </div>
+
+  <div class="funds-grid fade-in">
+    <div class="fund-item">
+      <div class="fund-pct">40%</div>
+      <div class="fund-amount">$12.000.000</div>
+      <div class="fund-label">Producto — Analytics, premium, marketplace de talento, ticketera</div>
+    </div>
+    <div class="fund-item">
+      <div class="fund-pct">35%</div>
+      <div class="fund-amount">$10.500.000</div>
+      <div class="fund-label">Growth — Onboarding músicos, partnerships restaurantes, merchandising</div>
+    </div>
+    <div class="fund-item">
+      <div class="fund-pct">15%</div>
+      <div class="fund-amount">$4.500.000</div>
+      <div class="fund-label">Operaciones — Soporte, community management, infraestructura</div>
+    </div>
+    <div class="fund-item">
+      <div class="fund-pct">10%</div>
+      <div class="fund-amount">$3.000.000</div>
+      <div class="fund-label">Legal / IP — Registro Inapi, términos, compliance de pagos</div>
+    </div>
+  </div>
+</section>
+
+<!-- CIERRE -->
+<section id="cierre">
+  <h2 class="close-title fade-in">
+    La música en vivo<br>no va a desaparecer.<br><em>El efectivo, sí.</em>
+  </h2>
+  <p class="close-sub fade-in">
+    Quien construya el puente digital entre el público y el artista en el momento del show captura un mercado que hoy no tiene dueño. Ese puente es A La Gorra.
+  </p>
+  <div class="close-url fade-in">alagorra.cl</div>
+  <p class="close-tagline fade-in">La gente busca lo genuino cuando lo artificial se masifica.</p>
+</section>
+
+<script>
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, entry.target.dataset.delay || 0);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
